@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "food-delivery",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}
