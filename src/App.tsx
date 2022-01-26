@@ -1,16 +1,18 @@
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
+  IonFab,
+  IonFabButton,
   IonIcon,
   IonLabel,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
   IonTabs,
-  setupIonicReact
+  setupIonicReact,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import { home, search, cart, notifications } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
@@ -56,19 +58,39 @@ const App: React.FC = () => (
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={triangle} />
-            <IonLabel>Tab 1</IonLabel>
+            <IonIcon icon={home} />
+            <IonLabel>Home</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
-          </IonTabButton>
+          <IonTabButton tab="tab2" href="/tab2" disabled></IonTabButton>
           <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
+            <IonIcon icon={cart} />
+            <IonLabel>cart</IonLabel>
           </IonTabButton>
         </IonTabBar>
       </IonTabs>
+
+      <IonFab
+        style={{
+          position: 'fixed',
+          zIndex: 99999,
+          bottom: 28,
+          left: '50%',
+          transform: 'translateX(-50%)',
+        }}
+      >
+        <IonFabButton
+          routerLink="/tab2"
+          color="primary"
+          style={
+            {
+              // '--box-shadow':
+              // '0px 5px 12px rgb(var(--ion-color-primary-shade-rgb, 0.05))',
+            }
+          }
+        >
+          <IonIcon icon={search} />
+        </IonFabButton>
+      </IonFab>
     </IonReactRouter>
   </IonApp>
 );
