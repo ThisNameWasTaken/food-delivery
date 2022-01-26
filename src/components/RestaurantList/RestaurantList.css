@@ -1,0 +1,21 @@
+.list.list-vertical {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+.list.list-vertical > .list-content {
+  flex-direction: column;
+  width: 100%;
+  overflow: visible;
+}
+
+.list.list-vertical > .list-content > .list-item {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.list.list-vertical > .list-content > .list-item > .list-item-media {
+  padding-bottom: 50%;
+}

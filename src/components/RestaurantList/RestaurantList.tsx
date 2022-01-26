@@ -1,5 +1,5 @@
 import { IonButton, IonIcon, IonText } from '@ionic/react';
-import { star } from 'ionicons/icons';
+import { bicycle, star } from 'ionicons/icons';
 import classNames from 'classnames';
 import './RestaurantList.css';
 
@@ -70,6 +70,7 @@ type RestaurantListProps = {
   items?: RestaurantListItemProps[];
   title?: string;
   icon?: React.ReactElement;
+  type?: 'horizontal' | 'vertical';
 } & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
@@ -81,13 +82,18 @@ const RestaurantList: React.FC<RestaurantListProps> = ({
   icon,
   className,
   style,
+  type = 'vertical',
   ...other
 }) => {
   return (
     <>
       {title && icon && <RestaurantListTitle title={title} icon={icon} />}
 
-      <div className={classNames('list', className)} style={style} {...other}>
+      <div
+        className={classNames('list', `list-${type}`, className)}
+        style={style}
+        {...other}
+      >
         <div className="list-content">
           {items.map((item) => (
             <ListItem key={item.id} {...item} />

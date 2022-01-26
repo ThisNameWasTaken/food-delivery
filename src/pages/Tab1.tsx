@@ -11,7 +11,7 @@ import {
   IonToolbar,
 } from '@ionic/react';
 import { location, notifications, time, trophy } from 'ionicons/icons';
-import HorizontalList from '../components/RestaurantList';
+import RestaurantList from '../components/RestaurantList';
 import { RestaurantListItemProps } from '../components/RestaurantList/RestaurantList';
 import useQuickRestaurants from '../hooks/useQuickRestaurants';
 import useTopRestaurants from '../hooks/useTopRestaurants';
@@ -60,13 +60,15 @@ const Tab1: React.FC = () => {
           className="search-bar ion-no-padding ion-margin-vertical"
         />
 
-        <HorizontalList
+        <RestaurantList
+          type="horizontal"
           title="Less than 30 minutes away"
           items={quickRestaurants}
           icon={<IonIcon icon={time} color="primary" slot="start" />}
         />
 
-        <HorizontalList
+        <RestaurantList
+          type="horizontal"
           title="Top rated restaurants"
           items={topRestaurants}
           icon={<IonIcon icon={trophy} color="warning" slot="start" />}

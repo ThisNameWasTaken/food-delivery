@@ -1,22 +1,34 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import {
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonSearchbar,
+  IonToolbar,
+} from '@ionic/react';
+import RestaurantList from '../components/RestaurantList';
+import { RestaurantListItemProps } from '../components/RestaurantList/RestaurantList';
+import useQuickRestaurants from '../hooks/useQuickRestaurants';
 import './Tab2.css';
 
 const Tab2: React.FC = () => {
+  const quickRestaurants: RestaurantListItemProps[] = useQuickRestaurants();
+
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Tab 2</IonTitle>
+      <IonHeader className="ion-no-border">
+        <IonToolbar className="search-toolbar">
+          <IonSearchbar
+            id="tab2-search-bar"
+            className="search-bar ion-no-padding ion-margin-vertical"
+          />
+
+          <IonButtons slot="end"></IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Tab 2</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer name="Tab 2 page" />
+
+      <IonContent fullscreen className="ion-padding ion-margin-vertical">
+        <RestaurantList type="vertical" items={quickRestaurants} />
       </IonContent>
     </IonPage>
   );

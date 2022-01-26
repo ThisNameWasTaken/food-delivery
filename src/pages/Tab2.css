@@ -1,0 +1,11 @@
+#tab2-search-bar {
+  margin: 24px 0 16px 0;
+}
+
+.search-toolbar {
+  --background: linear-gradient(
+    to bottom,
+    rgb(255, 255, 255, 1) 40%,
+    rgba(255, 255, 255, 0) 80%
+  );
+}
