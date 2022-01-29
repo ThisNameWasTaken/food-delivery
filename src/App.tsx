@@ -35,6 +35,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Restaurant from './pages/Restaurant';
 
 setupIonicReact();
 
@@ -72,7 +73,7 @@ const App: React.FC = () => (
       <IonFab
         style={{
           position: 'fixed',
-          zIndex: 99999,
+          zIndex: 0,
           bottom: 28,
           left: '50%',
           transform: 'translateX(-50%)',
@@ -91,6 +92,8 @@ const App: React.FC = () => (
           <IonIcon icon={search} />
         </IonFabButton>
       </IonFab>
+
+      <Route path="/restaurant/:id" component={Restaurant} />
     </IonReactRouter>
   </IonApp>
 );

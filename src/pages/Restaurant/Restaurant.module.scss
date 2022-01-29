@@ -1,0 +1,86 @@
+.background {
+  width: 100%;
+  height: 35%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: var(--ion-color-primary-tint);
+  background-size: cover;
+  background-position: center;
+}
+
+.title {
+  position: relative;
+  z-index: 1;
+  height: calc(20% - 16px);
+  display: flex;
+  text-shadow: 1px 1px 1px var(--ion-color-dark);
+
+  & > * {
+    margin: auto;
+    text-align: center;
+    padding-top: 32px;
+  }
+}
+
+.nav {
+  position: fixed;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  top: 0;
+  left: 0;
+  transition: 0.3s ease background-color, 0.3s ease box-shadow;
+
+  h1 {
+    color: transparent;
+    margin: 0;
+  }
+
+  &.scrolled {
+    background-color: var(--ion-color-dark-contrast);
+    box-shadow: 0 3px 7px -1px rgba(168, 40, 36, 0.1);
+
+    h1 {
+      color: var(--ion-color-dark);
+    }
+  }
+}
+
+.checkout {
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  bottom: 0;
+  background: hsl(2, 50%, 99%);
+  padding: 16px;
+  border: 1px solid rgba(var(--ion-color-primary-rgb), 0.1);
+  display: flex;
+  justify-content: space-between;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  position: fixed;
+  z-index: 999;
+}
+
+.checkoutButton {
+  display: block;
+  --box-shadow: 0 7px 14px -1px rgba(168, 40, 36, 0.2);
+  --border-radius: 9999px;
+  height: 3rem;
+}
+
+.totalLabel {
+  margin-left: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ion-color-dark);
+}
+
+.totalValue {
+  margin-left: 4px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+}

@@ -82,6 +82,7 @@ const RestaurantList: React.FC<RestaurantListProps> = ({
   icon,
   className,
   style,
+
   type = 'vertical',
   ...other
 }) => {
