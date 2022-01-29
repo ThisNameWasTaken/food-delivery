@@ -1,0 +1,23 @@
+.pay {
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  bottom: 0;
+  background: hsl(2, 50%, 99%);
+  padding: 16px;
+  border: 1px solid rgba(var(--ion-color-primary-rgb), 0.1);
+  display: flex;
+  justify-content: space-between;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  position: fixed;
+  z-index: 999;
+}
+
+.payButton {
+  display: block;
+  --box-shadow: 0 7px 14px -1px rgba(168, 40, 36, 0.2);
+  --border-radius: 9999px;
+  height: 3rem;
+  width: 100%;
+}

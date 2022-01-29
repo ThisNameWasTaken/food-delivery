@@ -63,7 +63,11 @@ const Restaurant = () => {
             <div className={styles.totalLabel}>Total</div>
             <div className={styles.totalValue}>{57.99} RON</div>
           </div>
-          <IonButton color="primary" className={styles.checkoutButton}>
+          <IonButton
+            color="primary"
+            className={styles.checkoutButton}
+            routerLink="/checkout"
+          >
             <IonIcon slot="start" icon={cart} />
             Checkout
           </IonButton>

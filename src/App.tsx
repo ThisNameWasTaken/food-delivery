@@ -12,7 +12,7 @@ import {
   setupIonicReact,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { home, search, cart, notifications } from 'ionicons/icons';
+import { home, search, cart } from 'ionicons/icons';
 import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
@@ -36,6 +36,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import Restaurant from './pages/Restaurant';
+import Checkout from './pages/Checkout';
 
 setupIonicReact();
 
@@ -94,6 +95,7 @@ const App: React.FC = () => (
       </IonFab>
 
       <Route path="/restaurant/:id" component={Restaurant} />
+      <Route path="/checkout" component={Checkout} />
     </IonReactRouter>
   </IonApp>
 );
