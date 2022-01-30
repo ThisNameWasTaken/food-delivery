@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 16px;
+  text-align: center;
+
+  & > * {
+    width: 100%;
+  }
+}
+
+.signUpButton {
+  display: block;
+  --box-shadow: 0 7px 14px -1px rgba(168, 40, 36, 0.2);
+  --border-radius: 9999px;
+  height: 3rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.row {
+  display: flex;
+  gap: 16px;
+
+  & > * {
+    flex: 1;
+  }
+}

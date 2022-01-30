@@ -12,7 +12,6 @@ import {
 } from '@ionic/react';
 import { location, notifications, time, trophy } from 'ionicons/icons';
 // @ts-ignore
-import btoa from 'btoa';
 import RestaurantList from '../components/RestaurantList';
 import { RestaurantListItemProps } from '../components/RestaurantList/RestaurantList';
 import useQuickRestaurants from '../hooks/useQuickRestaurants';

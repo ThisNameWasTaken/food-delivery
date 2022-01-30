@@ -84,6 +84,7 @@ const SignIn = () => {
               expand="block"
               color="primary"
               fill="outline"
+              routerLink="/sign-up"
             >
               Register
             </IonButton>

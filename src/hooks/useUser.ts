@@ -24,7 +24,38 @@ const useUser = () => {
     localStorage.removeItem('token');
   };
 
-  return { signIn, signOut };
+  const signUp = async ({
+    email,
+    username,
+    password,
+    firstName,
+    lastName,
+    role,
+  }: {
+    email: string;
+    username: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+  }) => {
+    try {
+      await request.post('/sign-up', {
+        body: {
+          email,
+          username,
+          password,
+          firstName,
+          lastName,
+          role,
+        },
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  return { signIn, signOut, signUp };
 };
 
 export default useUser;
