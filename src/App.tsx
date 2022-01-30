@@ -38,6 +38,7 @@ import './theme/variables.css';
 import Restaurant from './pages/Restaurant';
 import Checkout from './pages/Checkout';
 import { CartProvider } from './hooks/useCart';
+import SignIn from './pages/SignIn';
 
 setupIonicReact();
 
@@ -98,6 +99,7 @@ const App: React.FC = () => (
 
         <Route path="/restaurant/:id" component={Restaurant} />
         <Route path="/checkout" component={Checkout} />
+        <Route path="/sign-in" component={SignIn} />
       </IonReactRouter>
     </CartProvider>
   </IonApp>

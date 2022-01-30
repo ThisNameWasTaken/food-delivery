@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
+  padding: 16px;
+  text-align: center;
+  padding-bottom: 20vh;
+
+  & > * {
+    width: 100%;
+  }
+}
+
+.signInButton {
+  display: block;
+  --box-shadow: 0 7px 14px -1px rgba(168, 40, 36, 0.2);
+  --border-radius: 9999px;
+  height: 3rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.signUpButton {
+  display: block;
+  --border-radius: 9999px;
+  height: 3rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.noAccount {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(var(--ion-color-dark-rgb), 0.7);
+  margin-top: 48px;
+  margin-bottom: 0px;
+
+  .line {
+    display: inline-block;
+    margin: 8px;
+    height: 1px;
+    width: 30px;
+    background-color: rgba(var(--ion-color-dark-rgb), 0.5);
+    border-radius: 9999px;
+  }
+}
