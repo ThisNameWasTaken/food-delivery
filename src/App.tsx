@@ -37,66 +37,69 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import Restaurant from './pages/Restaurant';
 import Checkout from './pages/Checkout';
+import { CartProvider } from './hooks/useCart';
 
 setupIonicReact();
 
 const App: React.FC = () => (
   <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/tab1">
-            <Tab1 />
-          </Route>
-          <Route exact path="/tab2">
-            <Tab2 />
-          </Route>
-          <Route path="/tab3">
-            <Tab3 />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/tab1" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="tab1" href="/tab1">
-            <IonIcon icon={home} />
-            <IonLabel>Home</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2" disabled></IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={cart} />
-            <IonLabel>cart</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
+    <CartProvider>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route exact path="/tab1">
+              <Tab1 />
+            </Route>
+            <Route exact path="/tab2">
+              <Tab2 />
+            </Route>
+            <Route path="/tab3">
+              <Tab3 />
+            </Route>
+            <Route exact path="/">
+              <Redirect to="/tab1" />
+            </Route>
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="tab1" href="/tab1">
+              <IonIcon icon={home} />
+              <IonLabel>Home</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="tab2" href="/tab2" disabled></IonTabButton>
+            <IonTabButton tab="tab3" href="/tab3">
+              <IonIcon icon={cart} />
+              <IonLabel>cart</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
 
-      <IonFab
-        style={{
-          position: 'fixed',
-          zIndex: 0,
-          bottom: 28,
-          left: '50%',
-          transform: 'translateX(-50%)',
-        }}
-      >
-        <IonFabButton
-          routerLink="/tab2"
-          color="primary"
-          style={
-            {
-              // '--box-shadow':
-              // '0px 5px 12px rgb(var(--ion-color-primary-shade-rgb, 0.05))',
-            }
-          }
+        <IonFab
+          style={{
+            position: 'fixed',
+            zIndex: 0,
+            bottom: 28,
+            left: '50%',
+            transform: 'translateX(-50%)',
+          }}
         >
-          <IonIcon icon={search} />
-        </IonFabButton>
-      </IonFab>
+          <IonFabButton
+            routerLink="/tab2"
+            color="primary"
+            style={
+              {
+                // '--box-shadow':
+                // '0px 5px 12px rgb(var(--ion-color-primary-shade-rgb, 0.05))',
+              }
+            }
+          >
+            <IonIcon icon={search} />
+          </IonFabButton>
+        </IonFab>
 
-      <Route path="/restaurant/:id" component={Restaurant} />
-      <Route path="/checkout" component={Checkout} />
-    </IonReactRouter>
+        <Route path="/restaurant/:id" component={Restaurant} />
+        <Route path="/checkout" component={Checkout} />
+      </IonReactRouter>
+    </CartProvider>
   </IonApp>
 );
 

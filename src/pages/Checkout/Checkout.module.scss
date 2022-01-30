@@ -6,6 +6,7 @@
   padding: 16px;
   border: 1px solid rgba(var(--ion-color-primary-rgb), 0.1);
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   bottom: 0;
   width: 100%;
@@ -20,4 +21,19 @@
   --border-radius: 9999px;
   height: 3rem;
   width: 100%;
+}
+
+.totalLabel {
+  margin-left: 4px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ion-color-dark);
+}
+
+.totalValue {
+  margin-left: 4px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ion-color-dark);
+  margin-bottom: 16px;
 }

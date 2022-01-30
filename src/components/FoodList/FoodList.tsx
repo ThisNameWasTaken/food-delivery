@@ -8,6 +8,7 @@ import {
 } from '@ionic/react';
 import classNames from 'classnames';
 import { add, remove } from 'ionicons/icons';
+import useCart from '../../hooks/useCart';
 import styles from './FoodList.module.scss';
 
 export type FoodListItemProps = {
@@ -19,11 +20,15 @@ export type FoodListItemProps = {
 };
 
 const FoodListItem: React.FC<FoodListItemProps> = ({
+  id,
   media = '',
   name = '',
   price = 0,
   quantity = 0,
 }) => {
+  const item = { id, name, media, price, quantity };
+  const { addItem, removeItem } = useCart();
+
   return (
     <div className={styles.listItem}>
       <div className={styles.topRow}>
@@ -41,11 +46,19 @@ const FoodListItem: React.FC<FoodListItemProps> = ({
           )}
         </div>
         <IonButtons slot="start" className={styles.quantityControls}>
-          <IonButton color="primary" fill="outline">
+          <IonButton
+            onClick={() => removeItem(item)}
+            color="primary"
+            fill="outline"
+          >
             <IonIcon size="large" icon={remove} />
           </IonButton>
           <div className={styles.quantity}>{quantity}</div>
-          <IonButton color="primary" fill="outline">
+          <IonButton
+            onClick={() => addItem(item)}
+            color="primary"
+            fill="outline"
+          >
             <IonIcon size="large" icon={add} />
           </IonButton>
         </IonButtons>

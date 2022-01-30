@@ -11,14 +11,17 @@ import {
 } from '@ionic/react';
 import { arrowBack, cart } from 'ionicons/icons';
 import { useEffect, useRef } from 'react';
-import { useParams } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import FoodList from '../../components/FoodList';
+import useCart from '../../hooks/useCart';
 import useMenu from '../../hooks/useMenu';
 import styles from './Restaurant.module.scss';
 
 const Restaurant = () => {
+  const { goBack } = useHistory();
   const { id } = useParams<any>();
   const { items } = useMenu(id);
+  const { total, items: cartItems } = useCart();
   const navRef = useRef<HTMLDivElement>(null);
   const backButtonRef = useRef<HTMLIonButtonElement>(null);
 
@@ -35,7 +38,12 @@ const Restaurant = () => {
       <IonContent onIonScroll={onScroll} scrollEvents={true}>
         <div className={styles.nav} ref={navRef}>
           <IonButtons>
-            <IonButton color="light" fill="clear" ref={backButtonRef}>
+            <IonButton
+              onClick={goBack}
+              color="light"
+              fill="clear"
+              ref={backButtonRef}
+            >
               <IonIcon icon={arrowBack} slot="icon-only" />
             </IonButton>
           </IonButtons>
@@ -54,14 +62,21 @@ const Restaurant = () => {
           <p className="h1 ion-margin-bottom">Lorem ipsum restaurant</p>
         </IonText>
 
-        <FoodList items={items} />
+        <FoodList
+          items={items.map((item) => {
+            const cartItem = cartItems.find(
+              (cartItem) => cartItem.id === item.id
+            );
+            return { ...item, quantity: cartItem ? cartItem.quantity : 0 };
+          })}
+        />
 
         <div style={{ height: 90 }} />
 
         <div className={styles.checkout}>
           <div>
             <div className={styles.totalLabel}>Total</div>
-            <div className={styles.totalValue}>{57.99} RON</div>
+            <div className={styles.totalValue}>{total} RON</div>
           </div>
           <IonButton
             color="primary"

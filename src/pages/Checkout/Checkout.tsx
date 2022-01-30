@@ -8,21 +8,30 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import { notifications, location } from 'ionicons/icons';
+import { notifications, location, arrowBack } from 'ionicons/icons';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router';
 import FoodList from '../../components/FoodList';
-import useMenu from '../../hooks/useMenu';
+import useCart from '../../hooks/useCart';
 import styles from './Checkout.module.scss';
 
 const Checkout: React.FC = () => {
-  const { items } = useMenu('1');
+  const { items, total } = useCart();
+  const { goBack } = useHistory();
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log({ position });
+    }, console.error);
+  }, []);
 
   return (
     <IonPage>
       <IonHeader class="ion-no-border">
         <IonToolbar>
           <IonButtons slot="start">
-            <IonButton fill="clear" disabled style={{ visibility: 'hidden' }}>
-              <IonIcon icon={notifications} color="primary" slot="icon-only" />
+            <IonButton fill="clear" onClick={goBack}>
+              <IonIcon icon={arrowBack} color="primary" slot="icon-only" />
             </IonButton>
           </IonButtons>
 
@@ -47,6 +56,11 @@ const Checkout: React.FC = () => {
         <FoodList items={items} />
 
         <div className={styles.pay}>
+          <div>
+            <div className={styles.totalLabel}>Total</div>
+            <div className={styles.totalValue}>{total} RON</div>
+          </div>
+
           <IonButton
             color="primary"
             className={styles.payButton}

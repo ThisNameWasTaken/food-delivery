@@ -11,15 +11,40 @@ import {
   IonToolbar,
 } from '@ionic/react';
 import { location, notifications, time, trophy } from 'ionicons/icons';
+// @ts-ignore
+import btoa from 'btoa';
 import RestaurantList from '../components/RestaurantList';
 import { RestaurantListItemProps } from '../components/RestaurantList/RestaurantList';
 import useQuickRestaurants from '../hooks/useQuickRestaurants';
 import useTopRestaurants from '../hooks/useTopRestaurants';
 import './Tab1.css';
+import { useEffect } from 'react';
 
 const Tab1: React.FC = () => {
   const quickRestaurants: RestaurantListItemProps[] = useQuickRestaurants();
   const topRestaurants: RestaurantListItemProps[] = useTopRestaurants();
+
+  useEffect(() => {
+    const username = 'admin';
+    const password = 'admin';
+    const token = `Basic ${btoa(`${username}:${password}`)}`;
+    console.log({ token });
+    (async () => {
+      try {
+        const res = await fetch('http://localhost:8090/users/all', {
+          headers: {
+            Authorization: token,
+          },
+        });
+
+        const data = await res.json();
+
+        console.log({ data });
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, []);
 
   return (
     <IonPage>
