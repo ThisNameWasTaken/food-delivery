@@ -13,6 +13,7 @@ import { arrowBack, cart } from 'ionicons/icons';
 import { useEffect, useRef } from 'react';
 import { useHistory, useParams } from 'react-router';
 import FoodList from '../../components/FoodList';
+import ReviewList from '../../components/ReviewList';
 import useCart from '../../hooks/useCart';
 import useMenu from '../../hooks/useMenu';
 import useReviews from '../../hooks/useReviews';
@@ -34,10 +35,6 @@ const Restaurant = () => {
       backButtonRef.current.color = isScrolled ? 'dark' : 'light';
     }
   }
-
-  useEffect(() => {
-    console.log({ reviews });
-  }, [reviews]);
 
   return (
     <IonPage>
@@ -76,6 +73,8 @@ const Restaurant = () => {
             return { ...item, quantity: cartItem ? cartItem.quantity : 0 };
           })}
         />
+
+        <ReviewList items={reviews} />
 
         <div style={{ height: 90 }} />
 
