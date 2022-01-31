@@ -2,6 +2,7 @@ import { IonButton, IonIcon, IonText } from '@ionic/react';
 import { bicycle, star } from 'ionicons/icons';
 import classNames from 'classnames';
 import './RestaurantList.css';
+import { useHistory } from 'react-router';
 
 type RestaurantListTitleProps = {
   title: string;
@@ -40,13 +41,19 @@ export type RestaurantListItemProps = {
 };
 
 const ListItem: React.FC<RestaurantListItemProps> = ({
+  id = '1',
   media = '',
   name = '',
   rating = '',
   deliveryTime = '',
 }) => {
+  const history = useHistory();
+
   return (
-    <div className="list-item">
+    <div
+      className="list-item"
+      onClick={() => history.push(`/restaurant/${id}`)}
+    >
       <div
         className="list-item-media"
         style={{
