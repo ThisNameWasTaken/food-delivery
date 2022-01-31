@@ -36,7 +36,7 @@ const SignUp = () => {
     try {
       await user.signUp({
         // @ts-ignore
-        lastName: firstNameRef.current.value,
+        lastName: lastNameRef.current.value,
         // @ts-ignore
         firstName: firstNameRef.current.value,
         // @ts-ignore
@@ -49,14 +49,7 @@ const SignUp = () => {
         password: passwordRef.current.value,
       });
 
-      await user.signIn({
-        // @ts-ignore
-        username: usernameRef.current.value,
-        // @ts-ignore
-        password: usernameRef.current.value,
-      });
-
-      history.push('/tab1');
+      history.push('/sign-in');
     } catch (err) {
       console.error(err);
     }

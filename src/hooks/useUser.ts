@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import btoa from 'btoa';
 import useRequest from './useRequest';
 
@@ -6,22 +7,41 @@ import useRequest from './useRequest';
 
 const useUser = () => {
   const request = useRequest();
+  const [user, setUser] = useState<any>();
 
-  const signIn = ({
+  const signIn = async ({
     username,
     password,
   }: {
     username: string;
     password: string;
   }) => {
+    console.log({ username, password });
     const token = `Basic ${btoa(`${username}:${password}`)}`;
     localStorage.setItem('token', token);
 
-    request.get('/log-in');
+    await request.get('/login');
+
+    const [users, delivery, managers] = await Promise.all([
+      request.get('/users/all'),
+      request.get('/deliveryUsers/all'),
+      request.get('/restaurantManagers/all'),
+    ]);
+
+    const user = [...users, ...delivery, ...managers].find(
+      (user: any) => user.email === username || user.username === username
+    );
+
+    setUser(user);
+
+    localStorage.setItem('userEmail', username);
+    localStorage.setItem('userId', user.id);
   };
 
   const signOut = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('userEmail');
   };
 
   const signUp = async ({
@@ -40,7 +60,18 @@ const useUser = () => {
     role: string;
   }) => {
     try {
-      await request.post('/sign-up', {
+      signOut();
+
+      const url =
+        role === 'RESTAURANT_MANAGER'
+          ? '/registerRestaurantManger'
+          : role === 'DELIVERY_USER'
+          ? '/registerDeliveryUser'
+          : '/registerUser';
+
+      // const url = '/registerUser';
+
+      await request.post(url, {
         body: {
           email,
           username,
@@ -55,7 +86,7 @@ const useUser = () => {
     }
   };
 
-  return { signIn, signOut, signUp };
+  return { user, signIn, signOut, signUp };
 };
 
 export default useUser;

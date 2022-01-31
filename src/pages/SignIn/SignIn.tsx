@@ -13,6 +13,7 @@ import classNames from 'classnames';
 import { eye, eyeOff } from 'ionicons/icons';
 import { useRef, useState } from 'react';
 import { useHistory } from 'react-router';
+import useRequest from '../../hooks/useRequest';
 import useUser from '../../hooks/useUser';
 import styles from './SignIn.module.scss';
 
@@ -22,14 +23,24 @@ const SignIn = () => {
   const usernameRef = useRef(null);
   const passwordRef = useRef(null);
   const history = useHistory();
+  const request = useRequest();
 
-  function signIn() {
-    user.signIn({
+  async function signIn() {
+    await user.signIn({
       // @ts-ignore
       username: usernameRef.current.value,
       // @ts-ignore
-      password: usernameRef.current.value,
+      password: passwordRef.current.value,
     });
+
+    // const
+
+    // navigator.geolocation.getCurrentPosition(async (location) => {
+    //   request.post('/setUserPosition', {
+    //     queryParams: {},
+    //     body: {},
+    //   });
+    // });
 
     history.push('/tab1');
   }

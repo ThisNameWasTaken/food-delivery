@@ -26,29 +26,29 @@ const Tab1: React.FC = () => {
   const topRestaurants: RestaurantListItemProps[] = useTopRestaurants();
   useMenu('1');
 
-  useEffect(() => {
-    const username = 'admin';
-    const password = 'admin';
-    const token = `Basic ${btoa(`${username}:${password}`)}`;
-    localStorage.setItem('token', token);
+  // useEffect(() => {
+  //   const username = 'admin';
+  //   const password = 'admin';
+  //   const token = `Basic ${btoa(`${username}:${password}`)}`;
+  //   localStorage.setItem('token', token);
 
-    console.log({ token });
-    (async () => {
-      try {
-        const res = await fetch('http://localhost:8090/menu?restaurantId=1', {
-          headers: {
-            Authorization: token,
-          },
-        });
+  //   console.log({ token });
+  //   (async () => {
+  //     try {
+  //       const res = await fetch('http://localhost:8090/menu?restaurantId=1', {
+  //         headers: {
+  //           Authorization: token,
+  //         },
+  //       });
 
-        const data = await res.json();
+  //       const data = await res.json();
 
-        console.log({ data });
-      } catch (err) {
-        console.error(err);
-      }
-    })();
-  }, []);
+  //       console.log({ data });
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   })();
+  // }, []);
 
   return (
     <IonPage>

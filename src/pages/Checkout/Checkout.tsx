@@ -8,20 +8,33 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
+import { request } from 'https';
 import { notifications, location, arrowBack } from 'ionicons/icons';
 import { useEffect } from 'react';
 import { useHistory } from 'react-router';
 import FoodList from '../../components/FoodList';
 import useCart from '../../hooks/useCart';
+import useRequest from '../../hooks/useRequest';
 import styles from './Checkout.module.scss';
 
 const Checkout: React.FC = () => {
-  const { items, total } = useCart();
-  const { goBack } = useHistory();
+  const { items, total, placeOrder } = useCart();
+  const { goBack, push } = useHistory();
+  const request = useRequest();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       console.log({ position });
+      request.post('/setUserPosition', {
+        queryParams: {
+          // @ts-ignore
+          userId: localStorage.getItem('userId'),
+        },
+        body: {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        },
+      });
     }, console.error);
   }, []);
 
@@ -64,7 +77,10 @@ const Checkout: React.FC = () => {
           <IonButton
             color="primary"
             className={styles.payButton}
-            routerLink="/checkout"
+            onClick={() => {
+              placeOrder();
+              push('/tab1');
+            }}
           >
             Place order
           </IonButton>

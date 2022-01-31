@@ -36,6 +36,10 @@ const Restaurant = () => {
     }
   }
 
+  useEffect(() => {
+    localStorage.setItem('restaurantId', id);
+  }, []);
+
   return (
     <IonPage>
       <IonContent onIonScroll={onScroll} scrollEvents={true}>

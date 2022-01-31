@@ -55,8 +55,8 @@ const App: React.FC = () => (
             <Route exact path="/tab2">
               <Tab2 />
             </Route>
-            <Route path="/tab3">
-              <Tab3 />
+            <Route path="/checkout">
+              <Checkout />
             </Route>
             <Route exact path="/">
               <Redirect to="/tab1" />
@@ -68,7 +68,7 @@ const App: React.FC = () => (
               <IonLabel>Home</IonLabel>
             </IonTabButton>
             <IonTabButton tab="tab2" href="/tab2" disabled></IonTabButton>
-            <IonTabButton tab="tab3" href="/tab3">
+            <IonTabButton tab="checkout" href="/checkout">
               <IonIcon icon={cart} />
               <IonLabel>cart</IonLabel>
             </IonTabButton>

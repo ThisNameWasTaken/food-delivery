@@ -58,8 +58,10 @@ export default function useQuickRestaurants() {
   const request = useRequest();
   const [quickRestaurants, setQuickRestaurants] = useState(placeholders);
 
-  async function fetchTopRestaurants() {
+  async function fetchTopRestaurants(position: GeolocationPosition) {
     try {
+      const { latitude, longitude } = position.coords;
+
       const [restaurants, reviews] = await Promise.all([
         request.get('/restaurants/all'),
         request.get('/reviews/all'),
@@ -86,7 +88,7 @@ export default function useQuickRestaurants() {
   }
 
   useEffect(() => {
-    fetchTopRestaurants();
+    navigator.geolocation.getCurrentPosition(fetchTopRestaurants);
   }, []);
 
   return quickRestaurants;
