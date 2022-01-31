@@ -15,12 +15,14 @@ import { useHistory, useParams } from 'react-router';
 import FoodList from '../../components/FoodList';
 import useCart from '../../hooks/useCart';
 import useMenu from '../../hooks/useMenu';
+import useReviews from '../../hooks/useReviews';
 import styles from './Restaurant.module.scss';
 
 const Restaurant = () => {
   const { goBack } = useHistory();
   const { id } = useParams<any>();
   const { items } = useMenu(id);
+  const reviews = useReviews(id);
   const { total, items: cartItems } = useCart();
   const navRef = useRef<HTMLDivElement>(null);
   const backButtonRef = useRef<HTMLIonButtonElement>(null);
@@ -32,6 +34,10 @@ const Restaurant = () => {
       backButtonRef.current.color = isScrolled ? 'dark' : 'light';
     }
   }
+
+  useEffect(() => {
+    console.log({ reviews });
+  }, [reviews]);
 
   return (
     <IonPage>

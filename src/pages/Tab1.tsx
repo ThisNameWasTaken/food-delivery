@@ -11,26 +11,31 @@ import {
   IonToolbar,
 } from '@ionic/react';
 import { location, notifications, time, trophy } from 'ionicons/icons';
+import { useEffect } from 'react';
 // @ts-ignore
+import btoa from 'btoa';
 import RestaurantList from '../components/RestaurantList';
 import { RestaurantListItemProps } from '../components/RestaurantList/RestaurantList';
 import useQuickRestaurants from '../hooks/useQuickRestaurants';
 import useTopRestaurants from '../hooks/useTopRestaurants';
 import './Tab1.css';
-import { useEffect } from 'react';
+import useMenu from '../hooks/useMenu';
 
 const Tab1: React.FC = () => {
   const quickRestaurants: RestaurantListItemProps[] = useQuickRestaurants();
   const topRestaurants: RestaurantListItemProps[] = useTopRestaurants();
+  useMenu('1');
 
   useEffect(() => {
     const username = 'admin';
     const password = 'admin';
     const token = `Basic ${btoa(`${username}:${password}`)}`;
+    localStorage.setItem('token', token);
+
     console.log({ token });
     (async () => {
       try {
-        const res = await fetch('http://localhost:8090/users/all', {
+        const res = await fetch('http://localhost:8090/menu?restaurantId=1', {
           headers: {
             Authorization: token,
           },

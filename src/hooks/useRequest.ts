@@ -1,4 +1,4 @@
-const baseUrl = process.env.BASE_URL;
+const baseUrl = 'http://localhost:8090';
 
 const get = async (
   url: string,
@@ -12,7 +12,7 @@ const get = async (
 ) => {
   const token = localStorage.getItem('token');
 
-  if (!token) return console.error('No token found');
+  // if (!token) return console.error('No token found');
 
   try {
     const uriEncodedParams = [];
@@ -25,7 +25,7 @@ const get = async (
 
     const res = await fetch(`${baseUrl}${url}${queryParamsString}`, {
       headers: {
-        Authorization: token,
+        Authorization: token || '',
         ...headers,
       },
     });
@@ -52,7 +52,7 @@ const post = async (
 ) => {
   const token = localStorage.getItem('token');
 
-  if (!token) return console.error('No token found');
+  // if (!token) return console.error('No token found');
 
   try {
     const uriEncodedParams = [];
@@ -66,8 +66,9 @@ const post = async (
     const isFormData = body instanceof FormData;
 
     const res = await fetch(`${baseUrl}${url}${queryParamsString}`, {
+      method: 'POST',
       headers: {
-        Authorization: token,
+        Authorization: token || '',
         'Content-Type': isFormData ? 'multipart/form-data' : 'application/json',
         ...headers,
       },

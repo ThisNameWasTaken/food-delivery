@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import useRequest from './useRequest';
 
 const _mock = [
   {
@@ -43,8 +44,50 @@ const _mock = [
   },
 ];
 
+const placeholders = Array(4)
+  .fill(0)
+  .map((item, index) => ({
+    id: `${index}`,
+    media: ' ',
+    deliveryTime: ' ',
+    name: ' ',
+    rating: ' ',
+  }));
+
 export default function useQuickRestaurants() {
-  const [quickRestaurants, setQuickRestaurants] = useState(_mock);
+  const request = useRequest();
+  const [quickRestaurants, setQuickRestaurants] = useState(placeholders);
+
+  async function fetchTopRestaurants() {
+    try {
+      const [restaurants, reviews] = await Promise.all([
+        request.get('/restaurants/all'),
+        request.get('/reviews/all'),
+      ]);
+
+      const ratings = reviews.reduce((acc: any, review: any) => {
+        if (!acc[review.restaurant.id]) {
+          acc[review.restaurant.id] = 0;
+        }
+        acc[review.restaurant.id] += review.score / 2;
+        return acc;
+      }, {});
+
+      setQuickRestaurants(
+        restaurants.map((item: any, index: number) => ({
+          ..._mock[index],
+          ...item,
+          rating: ratings[item?.id]?.toFixed(1),
+        }))
+      );
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  useEffect(() => {
+    fetchTopRestaurants();
+  }, []);
 
   return quickRestaurants;
 }

@@ -50,7 +50,6 @@ ion-button {
 }
 
 .list-content {
-  --items-count: 5;
   display: flex;
   flex-wrap: nowrap;
   width: calc(var(--items-count) * calc(170px + 1rem));

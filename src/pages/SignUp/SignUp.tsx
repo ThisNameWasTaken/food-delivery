@@ -33,29 +33,33 @@ const SignUp = () => {
   const [role, setRole] = useState('USER');
 
   async function signUp() {
-    await user.signUp({
-      // @ts-ignore
-      lastName: firstNameRef.current.value,
-      // @ts-ignore
-      firstName: firstNameRef.current.value,
-      // @ts-ignore
-      username: usernameRef.current.value,
-      // @ts-ignore
-      role: role,
-      // @ts-ignore
-      email: emailRef.current.value,
-      // @ts-ignore
-      password: passwordRef.current.value,
-    });
+    try {
+      await user.signUp({
+        // @ts-ignore
+        lastName: firstNameRef.current.value,
+        // @ts-ignore
+        firstName: firstNameRef.current.value,
+        // @ts-ignore
+        username: usernameRef.current.value,
+        // @ts-ignore
+        role: role,
+        // @ts-ignore
+        email: emailRef.current.value,
+        // @ts-ignore
+        password: passwordRef.current.value,
+      });
 
-    await user.signIn({
-      // @ts-ignore
-      username: usernameRef.current.value,
-      // @ts-ignore
-      password: usernameRef.current.value,
-    });
+      await user.signIn({
+        // @ts-ignore
+        username: usernameRef.current.value,
+        // @ts-ignore
+        password: usernameRef.current.value,
+      });
 
-    history.push('/tab1');
+      history.push('/tab1');
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (

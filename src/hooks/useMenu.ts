@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { FoodListItemProps } from '../components/FoodList/FoodList';
+import useRequest from './useRequest';
 
 const _mock = [
   {
@@ -74,7 +76,22 @@ const _mock = [
 ];
 
 const useMenu = (restaurantId: string) => {
-  const [items, setItems] = useState(_mock);
+  const [items, setItems] = useState<FoodListItemProps[]>([]);
+  const request = useRequest();
+
+  useEffect(() => {
+    request
+      .get('/menu', { queryParams: { restaurantId } })
+      .then((items: any[]) =>
+        setItems(
+          items.map((item, index) => ({
+            ...item,
+            media: index < _mock.length ? _mock[index].media : _mock[0].media,
+          }))
+        )
+      )
+      .catch(console.error);
+  }, []);
 
   return { items };
 };

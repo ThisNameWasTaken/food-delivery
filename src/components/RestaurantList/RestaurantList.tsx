@@ -95,7 +95,10 @@ const RestaurantList: React.FC<RestaurantListProps> = ({
         style={style}
         {...other}
       >
-        <div className="list-content">
+        <div
+          className="list-content"
+          style={{ '--items-count': items.length } as any}
+        >
           {items.map((item) => (
             <ListItem key={item.id} {...item} />
           ))}
