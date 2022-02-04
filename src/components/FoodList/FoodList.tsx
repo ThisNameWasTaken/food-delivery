@@ -17,6 +17,7 @@ export type FoodListItemProps = {
   media: string;
   price: number;
   quantity?: number;
+  simplified?: boolean;
 };
 
 const FoodListItem: React.FC<FoodListItemProps> = ({
@@ -25,6 +26,7 @@ const FoodListItem: React.FC<FoodListItemProps> = ({
   name = '',
   price = 0,
   quantity = 0,
+  simplified = false,
 }) => {
   const item = { id, name, media, price, quantity };
   const { addItem, removeItem } = useCart();
@@ -33,6 +35,7 @@ const FoodListItem: React.FC<FoodListItemProps> = ({
     <div className={styles.listItem}>
       <div className={styles.topRow}>
         <div
+          hidden={simplified}
           className={styles.media}
           style={{ backgroundImage: `url(${media})` }}
         />
@@ -45,7 +48,11 @@ const FoodListItem: React.FC<FoodListItemProps> = ({
             </div>
           )}
         </div>
-        <IonButtons slot="start" className={styles.quantityControls}>
+        <IonButtons
+          slot="start"
+          className={styles.quantityControls}
+          hidden={simplified}
+        >
           <IonButton
             onClick={() => removeItem(item)}
             color="primary"
@@ -71,6 +78,7 @@ const FoodListItem: React.FC<FoodListItemProps> = ({
 
 type FoodListProps = {
   items?: FoodListItemProps[];
+  simplified?: boolean;
 } & React.DetailedHTMLProps<
   React.HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
@@ -80,12 +88,17 @@ const FoodList: React.FC<FoodListProps> = ({
   items = [],
   className,
   style,
+  simplified = false,
   ...other
 }) => {
   return (
-    <div className={classNames(styles.list, className)} {...other}>
+    <div
+      className={classNames(styles.list, className)}
+      {...other}
+      style={simplified ? { boxShadow: 'none', padding: 0, margin: 0 } : {}}
+    >
       {items.map((item) => (
-        <FoodListItem key={item.id} {...item} />
+        <FoodListItem key={item.id} {...item} simplified={simplified} />
       ))}
     </div>
   );

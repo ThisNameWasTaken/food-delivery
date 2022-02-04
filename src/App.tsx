@@ -40,6 +40,7 @@ import Checkout from './pages/Checkout';
 import { CartProvider } from './hooks/useCart';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import Orders from './pages/Orders';
 
 setupIonicReact();
 
@@ -102,6 +103,7 @@ const App: React.FC = () => (
         <Route path="/checkout" component={Checkout} />
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-up" component={SignUp} />
+        <Route path="/orders" component={Orders} />
       </IonReactRouter>
     </CartProvider>
   </IonApp>

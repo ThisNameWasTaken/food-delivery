@@ -36,12 +36,14 @@ const useUser = () => {
 
     localStorage.setItem('userEmail', username);
     localStorage.setItem('userId', user.id);
+    localStorage.setItem('userRole', user.role);
   };
 
   const signOut = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
     localStorage.removeItem('userEmail');
+    localStorage.removeItem('userRole');
   };
 
   const signUp = async ({
