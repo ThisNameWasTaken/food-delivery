@@ -28,6 +28,7 @@ import './Tab1.css';
 import useMenu from '../hooks/useMenu';
 import useUser from '../hooks/useUser';
 import { useHistory } from 'react-router';
+import OrderStatus from '../components/OrderStatus';
 
 const Tab1: React.FC = () => {
   const quickRestaurants: RestaurantListItemProps[] = useQuickRestaurants();
@@ -93,6 +94,8 @@ const Tab1: React.FC = () => {
           items={topRestaurants}
           icon={<IonIcon icon={trophy} color="warning" slot="start" />}
         />
+
+        <OrderStatus />
       </IonContent>
     </IonPage>
   );

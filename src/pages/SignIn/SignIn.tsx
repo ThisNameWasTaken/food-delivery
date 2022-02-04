@@ -42,7 +42,19 @@ const SignIn = () => {
     //   });
     // });
 
-    history.push('/tab1');
+    const userRole = localStorage.getItem('userRole');
+
+    if (userRole === 'RESTAURANT_MANAGER') {
+      history.push('/orders');
+    }
+
+    if (userRole === 'DELIVERY_USER') {
+      history.push('/orders');
+    }
+
+    if (userRole === 'USER') {
+      history.push('/tab1');
+    }
   }
 
   return (

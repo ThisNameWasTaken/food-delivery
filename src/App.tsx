@@ -44,24 +44,39 @@ import Orders from './pages/Orders';
 
 setupIonicReact();
 
+const PrivateRoute: React.FC<any> = (props) => {
+  const userRole = localStorage.getItem('userRole');
+
+  if (!userRole) return <Redirect to="sign-in" />;
+
+  if (
+    props.path !== '/orders' &&
+    (userRole === 'DELIVERY_USER' || userRole === 'RESTAURANT_MANAGER')
+  ) {
+    return <Redirect to="/orders" />;
+  }
+
+  return <Route {...props} />;
+};
+
 const App: React.FC = () => (
   <IonApp>
     <CartProvider>
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
-            <Route exact path="/tab1">
+            <PrivateRoute exact path="/tab1">
               <Tab1 />
-            </Route>
-            <Route exact path="/tab2">
+            </PrivateRoute>
+            <PrivateRoute exact path="/tab2">
               <Tab2 />
-            </Route>
-            <Route path="/checkout">
+            </PrivateRoute>
+            <PrivateRoute path="/checkout">
               <Checkout />
-            </Route>
-            <Route exact path="/">
+            </PrivateRoute>
+            <PrivateRoute exact path="/">
               <Redirect to="/tab1" />
-            </Route>
+            </PrivateRoute>
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
             <IonTabButton tab="tab1" href="/tab1">
@@ -99,11 +114,11 @@ const App: React.FC = () => (
           </IonFabButton>
         </IonFab>
 
-        <Route path="/restaurant/:id" component={Restaurant} />
-        <Route path="/checkout" component={Checkout} />
+        <PrivateRoute path="/restaurant/:id" component={Restaurant} />
+        <PrivateRoute path="/checkout" component={Checkout} />
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-up" component={SignUp} />
-        <Route path="/orders" component={Orders} />
+        <PrivateRoute path="/orders" component={Orders} />
       </IonReactRouter>
     </CartProvider>
   </IonApp>

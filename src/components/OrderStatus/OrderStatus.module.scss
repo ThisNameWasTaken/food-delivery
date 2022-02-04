@@ -1,0 +1,16 @@
+.orderStatus {
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  bottom: 0;
+  background: hsl(2, 50%, 99%);
+  padding: 16px;
+  border: 1px solid rgba(var(--ion-color-primary-rgb), 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  position: fixed;
+  z-index: 999;
+}

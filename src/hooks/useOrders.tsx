@@ -6,10 +6,12 @@ const useOrders = () => {
     deliveredOrders: any[];
     unassignedOrders: any[];
     activeOrders: any[];
+    waitingOrder: any;
   }>({
     deliveredOrders: [],
     unassignedOrders: [],
     activeOrders: [],
+    waitingOrder: null,
   });
   const request = useRequest();
 
@@ -43,6 +45,11 @@ const useOrders = () => {
       (order: any) => order.deliveryUser?.id === userId
     );
 
+    const waitingOrder: any = orders.reverse().find((order: any) => {
+      console.log(order);
+      return order.user?.id == userId && order.orderStatus !== 'DELIVERED';
+    });
+
     const unassignedOrders: any[] = orders.filter(
       (order: any) =>
         order.deliveryUser === null && order.orderStatus !== 'DELIVERED'
@@ -56,7 +63,12 @@ const useOrders = () => {
           order.user?.id == userId)
     );
 
-    setOrders({ unassignedOrders, deliveredOrders, activeOrders });
+    setOrders({
+      unassignedOrders,
+      deliveredOrders,
+      activeOrders,
+      waitingOrder,
+    });
   }
 
   useEffect(() => {

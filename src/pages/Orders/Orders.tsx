@@ -1,5 +1,18 @@
-import { IonButton, IonContent, IonPage, IonText } from '@ionic/react';
+import {
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonPage,
+  IonText,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/react';
+import classNames from 'classnames';
+import { notifications, logOutOutline, fastFood } from 'ionicons/icons';
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router';
 import FoodList from '../../components/FoodList';
 import useOrders from '../../hooks/useOrders';
 import useRequest from '../../hooks/useRequest';
@@ -10,6 +23,14 @@ const Orders = () => {
   const orders = useOrders();
   const request = useRequest();
   const userRole = localStorage.getItem('userRole');
+  const isRestaurantManager = userRole === 'RESTAURANT_MANAGER';
+  const user = useUser();
+  const history = useHistory();
+
+  const signOut = () => {
+    user.signOut();
+    history.push('/sign-in');
+  };
 
   async function setOrderStatus(
     orderId: string,
@@ -30,10 +51,36 @@ const Orders = () => {
 
   return (
     <IonPage>
+      <IonHeader class="ion-no-border">
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonButton
+              fill="clear"
+              disabled={!isRestaurantManager}
+              style={{ visibility: isRestaurantManager ? 'visible' : 'hidden' }}
+            >
+              <IonIcon icon={fastFood} color="primary" slot="icon-only" />
+            </IonButton>
+          </IonButtons>
+
+          <IonTitle>
+            <IonText color="dark" className="nav-title">
+              Orders
+            </IonText>
+          </IonTitle>
+
+          <IonButtons slot="end">
+            <IonButton fill="clear" onClick={signOut}>
+              <IonIcon icon={logOutOutline} color="dark" slot="icon-only" />
+            </IonButton>
+          </IonButtons>
+        </IonToolbar>
+      </IonHeader>
+
       <IonContent>
-        <div className={styles.orders}>
+        <div className={classNames(styles.orders, 'ion-padding')}>
           {orders.activeOrders.map((order) => (
-            <div className={styles.order} key={order.id}>
+            <IonText className={styles.order} key={order.id} color="dark">
               <div>
                 {order.restaurant.name} ({order.restaurant.location.latitude},{' '}
                 {order.restaurant.location.longitude})
@@ -64,7 +111,7 @@ const Orders = () => {
                     Deliver
                   </IonButton>
                 )}
-            </div>
+            </IonText>
           ))}
 
           {/* <IonText color="dark">
