@@ -28,11 +28,6 @@ const Orders = () => {
     });
   }
 
-  useEffect(() => {
-    console.log(orders);
-    console.log(userRole);
-  }, [orders]);
-
   return (
     <IonPage>
       <IonContent>
@@ -88,7 +83,6 @@ const Orders = () => {
           )} */}
 
           {orders.unassignedOrders.map((order) => {
-            console.log(userRole);
             return (
               <div className={styles.order} key={order.id}>
                 <div>

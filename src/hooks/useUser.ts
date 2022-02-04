@@ -16,7 +16,6 @@ const useUser = () => {
     username: string;
     password: string;
   }) => {
-    console.log({ username, password });
     const token = `Basic ${btoa(`${username}:${password}`)}`;
     localStorage.setItem('token', token);
 

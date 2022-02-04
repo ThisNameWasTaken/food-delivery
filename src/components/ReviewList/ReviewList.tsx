@@ -15,10 +15,6 @@ export type ReviewListProps = {
 };
 
 const ReviewList: React.FC<ReviewListProps> = ({ items }) => {
-  useEffect(() => {
-    console.log({ items });
-  }, [items]);
-
   return (
     <div className={styles.reviewList}>
       <IonText color="dark">

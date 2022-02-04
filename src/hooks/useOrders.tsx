@@ -34,8 +34,6 @@ const useOrders = () => {
       order.foodList = foodList;
       order.total = total;
 
-      console.log({ foodList });
-
       return order;
     });
 

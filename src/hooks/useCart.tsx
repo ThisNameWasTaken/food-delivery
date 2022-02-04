@@ -31,8 +31,6 @@ const CartProvider: React.FC = ({ children }) => {
 
   const addItem = useCallback(
     (item: FoodListItemProps) => {
-      console.log('add');
-
       const itemIndex = items.findIndex((i) => i.id === item.id);
 
       if (itemIndex === -1) {

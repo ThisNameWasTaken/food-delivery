@@ -10,7 +10,13 @@ import {
   IonTitle,
   IonToolbar,
 } from '@ionic/react';
-import { location, notifications, time, trophy } from 'ionicons/icons';
+import {
+  location,
+  logOutOutline,
+  notifications,
+  time,
+  trophy,
+} from 'ionicons/icons';
 import { useEffect } from 'react';
 // @ts-ignore
 import btoa from 'btoa';
@@ -20,35 +26,20 @@ import useQuickRestaurants from '../hooks/useQuickRestaurants';
 import useTopRestaurants from '../hooks/useTopRestaurants';
 import './Tab1.css';
 import useMenu from '../hooks/useMenu';
+import useUser from '../hooks/useUser';
+import { useHistory } from 'react-router';
 
 const Tab1: React.FC = () => {
   const quickRestaurants: RestaurantListItemProps[] = useQuickRestaurants();
   const topRestaurants: RestaurantListItemProps[] = useTopRestaurants();
   useMenu('1');
+  const user = useUser();
+  const history = useHistory();
 
-  // useEffect(() => {
-  //   const username = 'admin';
-  //   const password = 'admin';
-  //   const token = `Basic ${btoa(`${username}:${password}`)}`;
-  //   localStorage.setItem('token', token);
-
-  //   console.log({ token });
-  //   (async () => {
-  //     try {
-  //       const res = await fetch('http://localhost:8090/menu?restaurantId=1', {
-  //         headers: {
-  //           Authorization: token,
-  //         },
-  //       });
-
-  //       const data = await res.json();
-
-  //       console.log({ data });
-  //     } catch (err) {
-  //       console.error(err);
-  //     }
-  //   })();
-  // }, []);
+  const signOut = () => {
+    user.signOut();
+    history.push('/sign-in');
+  };
 
   return (
     <IonPage>
@@ -70,8 +61,8 @@ const Tab1: React.FC = () => {
           </IonTitle>
 
           <IonButtons slot="end">
-            <IonButton fill="clear">
-              <IonIcon icon={notifications} color="dark" slot="icon-only" />
+            <IonButton fill="clear" onClick={signOut}>
+              <IonIcon icon={logOutOutline} color="dark" slot="icon-only" />
             </IonButton>
           </IonButtons>
         </IonToolbar>

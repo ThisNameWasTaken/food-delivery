@@ -15,10 +15,6 @@ import './Tab2.css';
 const Tab2: React.FC = () => {
   const { items, search } = useSearch();
 
-  useEffect(() => {
-    console.log({ items });
-  }, [items]);
-
   return (
     <IonPage>
       <IonHeader className="ion-no-border">
