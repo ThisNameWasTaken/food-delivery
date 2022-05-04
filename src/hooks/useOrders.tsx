@@ -46,7 +46,6 @@ const useOrders = () => {
     );
 
     const waitingOrder: any = orders.reverse().find((order: any) => {
-      console.log(order);
       return order.user?.id == userId && order.orderStatus !== 'DELIVERED';
     });
 

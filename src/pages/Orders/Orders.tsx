@@ -55,11 +55,12 @@ const Orders = () => {
         <IonToolbar>
           <IonButtons slot="start">
             <IonButton
+              routerLink="/manage-restaurants"
               fill="clear"
               disabled={!isRestaurantManager}
               style={{ visibility: isRestaurantManager ? 'visible' : 'hidden' }}
             >
-              <IonIcon icon={fastFood} color="primary" slot="icon-only" />
+              <IonIcon icon={fastFood} slot="icon-only" />
             </IonButton>
           </IonButtons>
 

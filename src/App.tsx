@@ -41,6 +41,7 @@ import { CartProvider } from './hooks/useCart';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Orders from './pages/Orders';
+import ManageRestaurants from './pages/ManageRestaurants';
 
 setupIonicReact();
 
@@ -48,6 +49,14 @@ const PrivateRoute: React.FC<any> = (props) => {
   const userRole = localStorage.getItem('userRole');
 
   if (!userRole) return <Redirect to="sign-in" />;
+
+  if (
+    props.path === 'manage-restaurants' &&
+    userRole === 'RESTAURANT_MANAGER'
+  ) {
+    console.log('here');
+    return <Route {...props} />;
+  }
 
   if (
     props.path !== '/orders' &&
@@ -119,6 +128,10 @@ const App: React.FC = () => (
         <Route path="/sign-in" component={SignIn} />
         <Route path="/sign-up" component={SignUp} />
         <PrivateRoute path="/orders" component={Orders} />
+        <PrivateRoute
+          path="/manage-restaurants"
+          component={ManageRestaurants}
+        />
       </IonReactRouter>
     </CartProvider>
   </IonApp>
